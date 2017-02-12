@@ -15,6 +15,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/telenavincorporated/telenav-react#readme",
   "dependencies": {
+    "radium": "^0.18.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
