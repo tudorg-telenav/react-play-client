@@ -37,11 +37,17 @@ class NavigationBar extends React.Component {
             },
 
             li: {
-
+              float: 'left',
+              marginRight: 30
             },
 
             a: {
-
+              display: 'block',
+              padding: '10px 0',
+              color: '#337ab7',
+              textTransform: 'uppercase',
+              borderBottom: '1px solid rgba(170,201,229,0)',
+              WebkitTransition: '.25s linear'
             }
 
         };
