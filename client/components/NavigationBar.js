@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 
+@Radium
 class NavigationBar extends React.Component {
 
     getItems() {
@@ -79,4 +80,4 @@ class NavigationBar extends React.Component {
     }
 }
 
-export default Radium(NavigationBar);
+export default NavigationBar;

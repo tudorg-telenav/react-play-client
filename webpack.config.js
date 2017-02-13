@@ -18,7 +18,8 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'react'] // this is instead of using .babelrc
+          presets: ['es2015', 'react'], // this is instead of using .babelrc
+          plugins: ['transform-decorators-legacy'] // this is here for the @Radium decorator to work with Babel 6
         }
       }
     ]
