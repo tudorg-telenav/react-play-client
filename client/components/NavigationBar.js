@@ -29,7 +29,7 @@ class NavigationBar extends React.Component {
 
             div: {
                 position: 'relative',
-                top: 255
+                top: 50
             },
 
             ul: {
@@ -38,17 +38,18 @@ class NavigationBar extends React.Component {
             },
 
             li: {
-              float: 'left',
               marginRight: 30
             },
 
             a: {
               display: 'block',
-              padding: '10px 0',
+              padding: '10px 0px 80px 0px',
               color: '#337ab7',
               textTransform: 'uppercase',
               borderBottom: '1px solid rgba(170,201,229,0)',
-              WebkitTransition: '.25s linear'
+              WebkitTransition: '.25s linear',
+                transform: 'rotate(90deg)',
+            transformOrigin: 'left top 0'
             }
 
         };
