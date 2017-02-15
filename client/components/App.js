@@ -1,13 +1,28 @@
 import React from 'react';
 
-import NavigationBar from './NavigationBar';
+import Menu from './Menu';
 
 class App extends React.Component {
 
+    getStyles() {
+
+        return {
+
+            div: {
+                display: 'flex',
+                height: '100%'
+            }
+
+        };
+    }
+
     render() {
+
+        const styles = this.getStyles();
+
         return (
-            <div>
-              <NavigationBar />
+            <div style={styles.div}>
+              <Menu />
             </div>
         );
     }
