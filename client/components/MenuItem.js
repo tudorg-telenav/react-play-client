@@ -15,12 +15,17 @@ class MenuItem extends React.Component {
         };
     }
 
+    handleClick(e) {
+      var item = e.target.innerHTML;
+      this.props.onChange(item);
+    }
+
     render() {
 
         const styles = this.getStyles();
 
         return (
-            <button style={styles.span}>
+            <button onClick={this.handleClick.bind(this)} style={styles.span}>
                 {this.props.item}
             </button>
         );

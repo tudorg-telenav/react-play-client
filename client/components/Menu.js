@@ -22,11 +22,12 @@ class Menu extends React.Component {
     render() {
 
         const styles = this.getStyles();
+        const pages = ['careers', 'press'];
 
         let anchors = [];
-        for (var i = 0; i < PAGES.length; i++) {
+        for (var i = 0; i < pages.length; i++) {
             anchors.push((
-                <MenuItem item={PAGES[i]} />
+                <MenuItem key={i} item={pages[i]} onChange={this.props.onChange} />
             ));
         }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Radium from 'radium';
 
 import Careers from './Careers';
 import Press from './Press';
@@ -7,12 +6,12 @@ import Press from './Press';
 const Content = ({page}) => {
 
   switch (page) {
-    case PAGES[0]:// careers
+    case 'careers':
       return (
         <Careers />
       );
       break;
-    case PAGES[1]:// press
+    case 'press':
       return (
         <Press />
       );
@@ -22,7 +21,7 @@ const Content = ({page}) => {
 };
 
 Content.propTypes = {
-  page: React.PropTypes.oneOf(window.PAGES)
+  page: React.PropTypes.oneOf(['careers', 'press'])
 };
 
 export default Content;
