@@ -3,7 +3,7 @@ import Radium from 'radium';
 
 
 
-const Press = () => {
+const Press = (props) => {
 
   const getStyles = () => {
 
@@ -18,9 +18,17 @@ const Press = () => {
 
   const styles = getStyles();
 
+  var children = [];
+  if (props.data !== null) {
+    for (var i = 0; i < props.data.length; i++) {
+      children.push(<div key={props.data[i].id}>{props.data[i].name}</div>)
+    }
+  }
+
   return (
     <div style={styles.div}>
-      Press !!!
+      <h2>Press !!!</h2>
+      {children}
     </div>
   );
 

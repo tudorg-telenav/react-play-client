@@ -3,7 +3,7 @@ import Radium from 'radium';
 
 
 
-const Careers = () => {
+const Careers = (props) => {
 
   const getStyles = () => {
 
@@ -18,9 +18,18 @@ const Careers = () => {
 
   const styles = getStyles();
 
+  var children = [];
+  if (props.data !== null) {
+    for (var i = 0; i < props.data.length; i++) {
+      children.push(<div key={props.data[i].id}>{props.data[i].name}</div>)
+    }
+  }
+
   return (
+
     <div style={styles.div}>
-      Careers !!!
+      <h2>Careers !!!</h2>
+      {children}
     </div>
   );
 

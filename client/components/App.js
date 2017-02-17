@@ -5,9 +5,9 @@ import Content from './Content';
 
 class App extends React.Component {
 
-    constructor(props, context) {
+    constructor(props) {
 
-      super(props, context);
+      super(props);
 
       this.state = { // getInitialState method is deprecated
         page: 'careers'
@@ -28,7 +28,7 @@ class App extends React.Component {
 
     changeMenu(page) {
       this.setState({
-        page: page
+        page
       });
     }
 
