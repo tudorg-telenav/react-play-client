@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Menu from './Menu';
+import Content from './Content';
 
 class App extends React.Component {
 
@@ -23,9 +24,15 @@ class App extends React.Component {
         return (
             <div style={styles.div}>
               <Menu />
+              <Content page="press"/>
             </div>
         );
     }
 }
 
 export default App;
+
+window.PAGES = [
+  'careers',
+	'press'
+];

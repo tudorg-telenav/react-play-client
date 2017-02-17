@@ -6,10 +6,6 @@ import MenuItem from './MenuItem';
 @Radium
 class Menu extends React.Component {
 
-    getItems() {
-        return ['careers', 'press releases'];
-    }
-
     getStyles() {
 
         return {
@@ -26,12 +22,11 @@ class Menu extends React.Component {
     render() {
 
         const styles = this.getStyles();
-        const items = this.getItems();
 
         let anchors = [];
-        for (var i = 0; i < items.length; i++) {
+        for (var i = 0; i < PAGES.length; i++) {
             anchors.push((
-                <MenuItem item={items[i]} />
+                <MenuItem item={PAGES[i]} />
             ));
         }
 
