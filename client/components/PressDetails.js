@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CareerDetails = (props) => {
+const PressDetails = (props) => {
 
   const getStyles = () => {
 
@@ -15,14 +15,19 @@ const CareerDetails = (props) => {
 
   const styles = getStyles();
 
+  const handleBackClick = () => {
+    props.goBack();
+  };
+
   return (
 
     <div style={styles.div}>
-      <h4>Careers details for {props.data.title}</h4>
+      <button onClick={handleBackClick}>BACK</button>
+      <p>Press details for <strong>{props.data.title}</strong></p>
       <p>{props.data.content}</p>
     </div>
   );
 
 };
 
-export default CareerDetails;
+export default PressDetails;

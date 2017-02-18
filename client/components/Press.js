@@ -1,7 +1,5 @@
 import React from 'react';
-import Radium from 'radium';
-
-
+import PressItem from './PressItem';
 
 const Press = (props) => {
 
@@ -10,7 +8,10 @@ const Press = (props) => {
     return {
 
       div: {
-        width: '100%'
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
       }
 
     };
@@ -21,13 +22,14 @@ const Press = (props) => {
   var children = [];
   if (props.data !== null) {
     for (var i = 0; i < props.data.length; i++) {
-      children.push(<div key={props.data[i].id}>{props.data[i].name}</div>)
+      children.push(<PressItem onPressClick={props.onPressClick} name={props.data[i].name} key={props.data[i].id} id={props.data[i].id} />)
     }
   }
 
   return (
+
     <div style={styles.div}>
-      <h2>Press !!!</h2>
+      <h2>Careers !!!</h2>
       {children}
     </div>
   );

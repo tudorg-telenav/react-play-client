@@ -1,5 +1,4 @@
 import React from 'react';
-import CareerItem from './CareerItem';
 
 const Careers = (props) => {
 
@@ -8,10 +7,7 @@ const Careers = (props) => {
     return {
 
       div: {
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
+        width: '100%'
       }
 
     };
@@ -22,14 +18,13 @@ const Careers = (props) => {
   var children = [];
   if (props.data !== null) {
     for (var i = 0; i < props.data.length; i++) {
-      children.push(<CareerItem onCareerClick={props.onCareerClick} name={props.data[i].name} key={props.data[i].id} id={props.data[i].id} />)
+      children.push(<div key={props.data[i].id}>{props.data[i].name}</div>)
     }
   }
 
   return (
-
     <div style={styles.div}>
-      <h2>Careers !!!</h2>
+      <h2>Press !!!</h2>
       {children}
     </div>
   );

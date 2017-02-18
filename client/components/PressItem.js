@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CareerItem = (props) => {
+const PressItem = (props) => {
 
   const getStyles = () => {
 
@@ -14,7 +14,7 @@ const CareerItem = (props) => {
   };
 
   const handleClick = () => {
-    props.onCareerClick(props.id);
+    props.onPressClick(props.id);
   }
 
   const styles = getStyles();
@@ -25,4 +25,4 @@ const CareerItem = (props) => {
 
 };
 
-export default CareerItem;
+export default PressItem;
