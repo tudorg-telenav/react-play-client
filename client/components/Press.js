@@ -22,14 +22,14 @@ const Press = (props) => {
   var children = [];
   if (props.data !== null) {
     for (var i = 0; i < props.data.length; i++) {
-      children.push(<PressItem onPressClick={props.onPressClick} name={props.data[i].name} key={props.data[i].id} id={props.data[i].id} />)
+      children.push(<PressItem onSelect={props.onPressClick} name={props.data[i].name} key={props.data[i].id} id={props.data[i].id} />)
     }
   }
 
   return (
 
     <div style={styles.div}>
-      <h2>Careers !!!</h2>
+      <h2>Press Releases</h2>
       {children}
     </div>
   );

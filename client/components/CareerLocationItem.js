@@ -7,7 +7,7 @@ const CareerLocationItem = (props) => {
     return {
 
       button: {
-        width: '60%'
+        width: '100%'
       }
 
     };
