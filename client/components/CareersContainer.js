@@ -11,8 +11,9 @@ class CareersContainer extends React.Component {
 
     this.state = {
       selectedLocation: null,
-      careerData: null,
-      detailData: null
+      locationData: null,
+      detailData: null,
+      careerTreeData: null
     };
   };
 
@@ -21,25 +22,34 @@ class CareersContainer extends React.Component {
     axios.get('http://localhost:3001/careerLocations')
       .then(res => {
         this.setState({
-          careerData: res.data
+          locationData: res.data
+        });
+      });
+
+    axios.get('http://localhost:3001/careers/')
+      .then(res => {
+        this.setState({
+          careerTreeData: res.data
         });
       });
   }
 
-  changeSelectedLocation(id) {
+  onSelectLocationItem(locationId) {
 
-    axios.get('http://localhost:3001/career/' + location)
+    axios.get('http://localhost:3001/careers/' + locationId)
       .then(res => {
         this.setState({
-          detailData: res.data,
-          selectedPress: id
+          careerTreeData: res.data,
+          selectedLocation: locationId
         });
       });
   }
 
   render() {
     return (
-      <CareerLocations onPressClick={this.changeSelectedLocation.bind(this)} data={this.state.careerData}/>
+      <div>
+        <CareerLocations onSelectItem={this.onSelectLocationItem.bind(this)} data={this.state.locationData}/>
+      </div>
     );
   }
 

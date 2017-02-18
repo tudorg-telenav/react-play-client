@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PressItem = (props) => {
+const CareerLocationItem = (props) => {
 
   const getStyles = () => {
 
@@ -25,4 +25,4 @@ const PressItem = (props) => {
 
 };
 
-export default PressItem;
+export default CareerLocationItem;

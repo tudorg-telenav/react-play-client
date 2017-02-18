@@ -1,4 +1,5 @@
 import React from 'react';
+import CareerLocationItem from './CareerLocationItem';
 
 const CareerLocations = (props) => {
 
@@ -18,7 +19,7 @@ const CareerLocations = (props) => {
   var children = [];
   if (props.data !== null) {
     for (var i = 0; i < props.data.length; i++) {
-      children.push(<div key={props.data[i].id}>{props.data[i].name}</div>)
+      children.push(<CareerLocationItem onSelect={props.onSelectItem} name={props.data[i].name} id={props.data[i].id} key={props.data[i].id} />)
     }
   }
 
