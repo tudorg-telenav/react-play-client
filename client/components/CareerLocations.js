@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Careers = (props) => {
+const CareerLocations = (props) => {
 
   const getStyles = () => {
 
@@ -24,11 +24,11 @@ const Careers = (props) => {
 
   return (
     <div style={styles.div}>
-      <h2>Press !!!</h2>
+      <h2>Career Locations</h2>
       {children}
     </div>
   );
 
 };
 
-export default Careers;
+export default CareerLocations;
