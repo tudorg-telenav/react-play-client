@@ -13,10 +13,14 @@ const CareerItem = (props) => {
     };
   };
 
+  const handleClick = () => {
+    props.onCareerClick(props.id);
+  }
+
   const styles = getStyles();
 
   return (
-    <button style={styles.button} key={props.id}>{props.name}</button>
+    <button onClick={handleClick} style={styles.button} key={props.id}>{props.name}</button>
   );
 
 };

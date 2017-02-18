@@ -22,7 +22,7 @@ const Careers = (props) => {
   var children = [];
   if (props.data !== null) {
     for (var i = 0; i < props.data.length; i++) {
-      children.push(<CareerItem name={props.data[i].name} key={props.data[i].id} id={props.data[i].id} />)
+      children.push(<CareerItem onCareerClick={props.onCareerClick} name={props.data[i].name} key={props.data[i].id} id={props.data[i].id} />)
     }
   }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import Careers from './Careers';
+import CareerDetails from './CareerDetails';
 
 class CareersContainer extends React.Component {
 
@@ -10,7 +11,8 @@ class CareersContainer extends React.Component {
     super(props);
 
     this.state = {
-      details: false,
+      selectedCareer: null,
+      detailData: null,
       data: null
     };
   };
@@ -25,14 +27,25 @@ class CareersContainer extends React.Component {
       });
   }
 
+  changeSelectedCareer(id) {
+
+    axios.get('http://localhost:3001/careers/' + id)
+      .then(res => {
+        this.setState({
+          detailData: res.data,
+          selectedCareer: id
+        });
+      });
+  }
+
   render() {
-    if (this.state.details) {
+    if (this.state.selectedCareer !== null) {
       return (
-        <Careers data={this.state.data}/>
+        <CareerDetails data={this.state.detailData}/>
       );
     } else {
       return (
-        <Careers data={this.state.data}/>
+        <Careers onCareerClick={this.changeSelectedCareer.bind(this)} data={this.state.data}/>
       );
     }
   }
