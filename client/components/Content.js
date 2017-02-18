@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import Careers from './Careers';
+import CareersContainer from './CareersContainer';
 import Press from './Press';
 
 class Content extends React.Component {
@@ -18,13 +18,6 @@ class Content extends React.Component {
 
   componentDidMount() {
 
-    axios.get('http://localhost:3001/careers')
-      .then(res => {
-        this.setState({
-          careersData: res.data
-        });
-      });
-
     axios.get('http://localhost:3001/press')
       .then(res => {
         this.setState({
@@ -37,7 +30,7 @@ class Content extends React.Component {
     switch (this.props.page) {
       case 'careers':
         return (
-          <Careers data={this.state.careersData} />
+          <CareersContainer />
         );
         break;
       case 'press':
