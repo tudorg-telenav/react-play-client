@@ -33,7 +33,9 @@ const CareersListSection = (props) => {
   }
 
   return (
-    <div style={styles.div}>
+    <div
+      style={styles.div}
+    >
       <span>{props.section}</span>
       {children}
     </div>

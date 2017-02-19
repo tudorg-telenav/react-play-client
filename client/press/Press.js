@@ -48,11 +48,17 @@ class PressContainer extends React.Component {
   render() {
     if (this.state.selectedPress !== null) {
       return (
-        <PressDetails goBack={this.goBackFromDetails.bind(this)} data={this.state.detailData}/>
+        <PressDetails
+          goBack={this.goBackFromDetails.bind(this)}
+          data={this.state.detailData}
+        />
       );
     } else {
       return (
-        <Press onPressClick={this.changeSelectedCareer.bind(this)} data={this.state.data}/>
+        <Press
+          onPressClick={this.changeSelectedCareer.bind(this)}
+          data={this.state.data}
+        />
       );
     }
   }

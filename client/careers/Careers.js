@@ -65,12 +65,17 @@ class CareersContainer extends React.Component {
   render() {
     return (
       <div>
-        <CareerLocations onSelectItem={this.selectLocationItem.bind(this)} data={this.state.locationData}/>
+        <CareerLocations
+          onSelectItem={this.selectLocationItem.bind(this)}
+          data={this.state.locationData}
+        />
         <CareersList
           onListItemSelection={this.selectListItem.bind(this)}
           data={this.state.careerListData}
         />
-        <CareerDetails data={this.state.detailData} />
+        <CareerDetails
+          data={this.state.detailData}
+        />
       </div>
     );
   }

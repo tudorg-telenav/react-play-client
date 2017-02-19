@@ -7,58 +7,58 @@ import CareersContainer from './careers/Careers';
 
 class App extends React.Component {
 
-    constructor(props) {
+  constructor(props) {
 
-      super(props);
+    super(props);
 
-      this.state = { // getInitialState method is deprecated
-        page: 'careers'
-      };
+    this.state = { // getInitialState method is deprecated
+      page: 'careers'
     };
+  };
 
-    getStyles() {
+  getStyles() {
 
-        return {
+    return {
 
-            div: {
-                display: 'flex',
-                height: '100%'
-            }
+      div: {
+        display: 'flex',
+        height: '100%'
+      }
 
-        };
-    }
+    };
+  }
 
-    changeMenu(page) {
-      this.setState({
-        page
-      });
-    }
+  changeMenu(page) {
+    this.setState({
+      page
+    });
+  }
 
-    render() {
+  render() {
 
-        const styles = this.getStyles();
+    const styles = this.getStyles();
 
-        var content = null;
-        switch (this.state.page) {
-          case 'careers':
-            content = (
-              <CareersContainer />
-            );
-            break;
-          case 'press':
-            content = (
-              <PressContainer />
-            );
-            break;
-        }
-
-        return (
-            <div style={styles.div}>
-              <Menu onChange={this.changeMenu.bind(this)}/>
-              {content}
-            </div>
+    var content = null;
+    switch (this.state.page) {
+      case 'careers':
+        content = (
+          <CareersContainer />
         );
+        break;
+      case 'press':
+        content = (
+          <PressContainer />
+        );
+        break;
     }
+
+    return (
+      <div style={styles.div}>
+        <Menu onChange={this.changeMenu.bind(this)}/>
+        {content}
+      </div>
+    );
+  }
 }
 
 ReactDOM.render(

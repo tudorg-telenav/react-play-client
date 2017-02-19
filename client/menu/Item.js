@@ -4,32 +4,35 @@ import Radium from 'radium';
 @Radium
 class MenuItem extends React.Component {
 
-    getStyles() {
+  getStyles() {
 
-        return {
+    return {
 
-            button: {
-                textAlign: 'center'
-            }
+      button: {
+        textAlign: 'center'
+      }
 
-        };
-    }
+    };
+  }
 
-    handleClick(e) {
-      var item = e.target.innerHTML;
-      this.props.onChange(item);
-    }
+  handleClick(e) {
+    var item = e.target.innerHTML;
+    this.props.onChange(item);
+  }
 
-    render() {
+  render() {
 
-        const styles = this.getStyles();
+    const styles = this.getStyles();
 
-        return (
-            <button onClick={this.handleClick.bind(this)} style={styles.span}>
-                {this.props.item}
-            </button>
-        );
-    }
+    return (
+      <button
+        onClick={this.handleClick.bind(this)}
+        style={styles.span}
+      >
+        {this.props.item}
+      </button>
+    );
+  }
 }
 
 export default MenuItem;

@@ -22,7 +22,11 @@ const PressDetails = (props) => {
   return (
 
     <div style={styles.div}>
-      <button onClick={handleBackClick}>BACK</button>
+      <button
+        onClick={handleBackClick}
+      >
+        BACK
+      </button>
       <p>Press details for <strong>{props.data.title}</strong></p>
       <p>{props.data.content}</p>
     </div>

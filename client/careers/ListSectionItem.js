@@ -7,7 +7,12 @@ const CareersListSectionItem = (props) => {
   };
 
   return (
-    <button onClick={handleClick} key={props.id}>{props.title}</button>
+    <button
+      onClick={handleClick}
+      key={props.id}
+    >
+      {props.title}
+    </button>
   );
 
 };

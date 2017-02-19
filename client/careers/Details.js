@@ -19,7 +19,9 @@ const CareerDetails = (props) => {
   const content = props.data !== null ? props.data.content : '';
 
   return (
-    <div style={styles.div}>
+    <div
+      style={styles.div}
+    >
       <h2>{title}</h2>
       <p>{content}</p>
     </div>

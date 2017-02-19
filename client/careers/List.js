@@ -37,7 +37,9 @@ const CareersList = (props) => {
 
   return (
 
-    <div style={styles.div}>
+    <div
+      style={styles.div}
+    >
       <h2>Careers List</h2>
       {children}
     </div>

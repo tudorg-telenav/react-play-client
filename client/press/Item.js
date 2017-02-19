@@ -15,12 +15,18 @@ const PressItem = (props) => {
 
   const handleClick = () => {
     props.onSelect(props.id);
-  }
+  };
 
   const styles = getStyles();
 
   return (
-    <button onClick={handleClick} style={styles.button} key={props.id}>{props.name}</button>
+    <button
+      onClick={handleClick}
+      style={styles.button}
+      key={props.id}
+    >
+      {props.name}
+    </button>
   );
 
 };
