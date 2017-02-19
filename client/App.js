@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Menu from './menu/Menu';
+import Home from './home/Home';
 import PressContainer from './press/Press';
 import CareersContainer from './careers/Careers';
 
@@ -12,7 +13,7 @@ class App extends React.Component {
     super(props);
 
     this.state = { // getInitialState method is deprecated
-      page: 'careers'
+      page: 'home'
     };
   };
 
@@ -39,6 +40,11 @@ class App extends React.Component {
 
     var content = null;
     switch (this.state.page) {
+      case 'home':
+        content = (
+          <Home onGoToCareers={this.changeMenu.bind(this)}/>
+        );
+        break;
       case 'careers':
         content = (
           <CareersContainer />

@@ -22,7 +22,7 @@ class Menu extends React.Component {
   render() {
 
     const styles = this.getStyles();
-    const pages = ['careers', 'press'];
+    const pages = ['home', 'careers', 'press'];
 
     let anchors = [];
     for (var i = 0; i < pages.length; i++) {
