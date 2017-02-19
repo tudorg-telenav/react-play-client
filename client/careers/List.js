@@ -8,7 +8,7 @@ const CareersList = (props) => {
     return {
 
       div: {
-        width: 500,
+        width: 550,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
@@ -25,6 +25,7 @@ const CareersList = (props) => {
     if (props.data.hasOwnProperty(section)) {
       children.push(
         <CareersListSection
+          selectedCareerId={props.selectedCareerId}
           onSectionIntemSelection={props.onListItemSelection}
           section={section}
           data={props.data[section]}

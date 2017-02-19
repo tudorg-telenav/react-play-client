@@ -28,6 +28,7 @@ class Menu extends React.Component {
     for (var i = 0; i < pages.length; i++) {
       anchors.push((
         <MenuItem
+          isSelected={this.props.selectedItem === pages[i]}
           key={i}
           item={pages[i]}
           onChange={this.props.onChange}

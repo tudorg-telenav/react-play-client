@@ -21,6 +21,7 @@ const CareerLocations = (props) => {
     for (var i = 0; i < props.data.length; i++) {
       children.push(
         <CareerLocationItem
+          isSelected={props.selectedLocationId === props.data[i].id}
           onSelect={props.onSelectItem}
           name={props.data[i].name}
           id={props.data[i].id}

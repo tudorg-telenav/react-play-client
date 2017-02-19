@@ -6,8 +6,22 @@ const CareersListSectionItem = (props) => {
     props.onSelect(props.id);
   };
 
+  const getStyles = () => {
+
+    return {
+
+      button: {
+        color: props.isSelected ? 'red' : 'black',
+        fontWeight: props.isSelected ? 'bold' : 'normal'
+      }
+    };
+  };
+
+  const styles = getStyles();
+
   return (
     <button
+      style={styles.button}
       onClick={handleClick}
       key={props.id}
     >

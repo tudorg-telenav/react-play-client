@@ -23,6 +23,7 @@ const CareersListSection = (props) => {
     for (var i = 0; i < props.data.length; i++) {
       children.push(
         <CareersListSectionItem
+          isSelected={props.selectedCareerId === props.data[i].id}
           onSelect={props.onSectionIntemSelection}
           title={props.data[i].title}
           key={i}

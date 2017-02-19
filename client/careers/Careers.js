@@ -15,7 +15,8 @@ class CareersContainer extends React.Component {
       selectedLocation: null,
       locationData: null,
       detailData: null,
-      careerListData: null
+      careerListData: null,
+      selectedCareerId: null
     };
   };
 
@@ -61,22 +62,23 @@ class CareersContainer extends React.Component {
 
   }
 
-  selectLocationItem(locationId) {
+  selectLocationItem(selectedLocationId) {
 
-    axios.get('http://localhost:3001/careers/' + locationId)
+    axios.get('http://localhost:3001/careers/' + selectedLocationId)
       .then(res => {
         this.setState({
           careerListData: res.data,
-          selectedLocation: locationId
+          selectedLocationId
         });
       });
   }
 
-  selectListItem(itemId) {
+  selectListItem(selectedCareerId) {
 
-    var detailData = this.getCareer(itemId);
+    var detailData = this.getCareer(selectedCareerId);
     this.setState({
-      detailData
+      detailData,
+      selectedCareerId
     });
   }
 
@@ -87,11 +89,13 @@ class CareersContainer extends React.Component {
     return (
       <div style={styles.outerDiv}>
         <CareerLocations
+          selectedLocationId={this.state.selectedLocationId}
           onSelectItem={this.selectLocationItem.bind(this)}
           data={this.state.locationData}
         />
         <div style={styles.innerDiv}>
           <CareersList
+            selectedCareerId={this.state.selectedCareerId}
             onListItemSelection={this.selectListItem.bind(this)}
             data={this.state.careerListData}
           />

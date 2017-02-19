@@ -9,7 +9,8 @@ class MenuItem extends React.Component {
     return {
 
       button: {
-        textAlign: 'center'
+        color: this.props.isSelected ? 'red' : 'black',
+        fontWeight: this.props.isSelected ? 'bold' : 'normal'
       }
 
     };
@@ -27,7 +28,7 @@ class MenuItem extends React.Component {
     return (
       <button
         onClick={this.handleClick.bind(this)}
-        style={styles.span}
+        style={styles.button}
       >
         {this.props.item}
       </button>

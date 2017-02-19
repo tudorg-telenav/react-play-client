@@ -53,7 +53,10 @@ class App extends React.Component {
 
     return (
       <div style={styles.div}>
-        <Menu onChange={this.changeMenu.bind(this)}/>
+        <Menu
+          selectedItem={this.state.page}
+          onChange={this.changeMenu.bind(this)}
+        />
         {content}
       </div>
     );
