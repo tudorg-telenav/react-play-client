@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PressContainer from './PressContainer';
-import CareersContainer from './CareersContainer';
+import PressContainer from './press/Press';
+import CareersContainer from './careers/Careers';
 
 const Content = (props) => {
 

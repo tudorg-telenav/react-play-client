@@ -1,7 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 
-import MenuItem from './MenuItem';
+import MenuItem from './Item';
 
 @Radium
 class Menu extends React.Component {

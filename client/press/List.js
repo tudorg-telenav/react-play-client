@@ -1,5 +1,5 @@
 import React from 'react';
-import PressItem from './PressItem';
+import PressItem from './Item';
 
 const Press = (props) => {
 

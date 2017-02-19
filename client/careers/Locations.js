@@ -1,5 +1,5 @@
 import React from 'react';
-import CareerLocationItem from './CareerLocationItem';
+import CareerLocationItem from './LocationItem';
 
 const CareerLocations = (props) => {
 

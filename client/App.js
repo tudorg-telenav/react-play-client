@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Menu from './Menu';
+import Menu from './menu/Menu';
 import Content from './Content';
 
 class App extends React.Component {

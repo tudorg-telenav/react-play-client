@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
-import CareerLocations from './CareerLocations';
-import CareersList from './CareersList';
-import CareerDetails from './CareerDetails';
+import CareerLocations from './Locations';
+import CareersList from './List';
+import CareerDetails from './Details';
 
 class CareersContainer extends React.Component {
 

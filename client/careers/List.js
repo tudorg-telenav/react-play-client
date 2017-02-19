@@ -1,5 +1,5 @@
 import React from 'react';
-import CareersListSection from './CareersListSection';
+import CareersListSection from './ListSection';
 
 const CareersList = (props) => {
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-import Press from './Press';
-import PressDetails from './PressDetails';
+import Press from './List';
+import PressDetails from './Details';
 
 class PressContainer extends React.Component {
 
