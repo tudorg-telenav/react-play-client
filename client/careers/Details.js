@@ -13,10 +13,6 @@ const CareerDetails = (props) => {
     };
   };
 
-  const handleClick = () => {
-    props.onSelect(props.id);
-  }
-
   const styles = getStyles();
 
   const title = props.data !== null ? props.data.title : '';

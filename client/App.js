@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Menu from './menu/Menu';
-import Content from './Content';
+import PressContainer from './press/Press';
+import CareersContainer from './careers/Careers';
 
 class App extends React.Component {
 
@@ -36,13 +38,30 @@ class App extends React.Component {
 
         const styles = this.getStyles();
 
+        var content = null;
+        switch (this.state.page) {
+          case 'careers':
+            content = (
+              <CareersContainer />
+            );
+            break;
+          case 'press':
+            content = (
+              <PressContainer />
+            );
+            break;
+        }
+
         return (
             <div style={styles.div}>
               <Menu onChange={this.changeMenu.bind(this)}/>
-              <Content page={this.state.page}/>
+              {content}
             </div>
         );
     }
 }
 
-export default App;
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
+);

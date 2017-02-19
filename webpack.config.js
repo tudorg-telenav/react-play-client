@@ -6,7 +6,7 @@ var APP_ROOT = 'client';
 
 module.exports = {
   devtool: 'source-map', // for being able to debug things
-  entry: './' + APP_ROOT + '/client.js',
+  entry: './' + APP_ROOT + '/App.js',
   output: {
       path: __dirname,
       filename: 'bundle.js'
