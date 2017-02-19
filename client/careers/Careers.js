@@ -56,7 +56,8 @@ class CareersContainer extends React.Component {
 
         var detailData = this.getFirstCareer();
         this.setState({
-          detailData
+          detailData,
+          selectedCareerId: detailData.id
         });
       });
 
@@ -78,6 +79,11 @@ class CareersContainer extends React.Component {
           this.setState({
             careerListData: res.data,
             selectedLocationId
+          });
+          var detailData = this.getFirstCareer();
+          this.setState({
+            detailData,
+            selectedCareerId: detailData.id
           });
         });
     }
