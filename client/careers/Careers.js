@@ -64,13 +64,23 @@ class CareersContainer extends React.Component {
 
   selectLocationItem(selectedLocationId) {
 
-    axios.get('http://localhost:3001/careers/' + selectedLocationId)
-      .then(res => {
-        this.setState({
-          careerListData: res.data,
-          selectedLocationId
+    if (selectedLocationId === this.state.selectedLocationId) {
+      axios.get('http://localhost:3001/careers/')
+        .then(res => {
+          this.setState({
+            careerListData: res.data,
+            selectedLocationId: null
+          });
         });
-      });
+    } else {
+      axios.get('http://localhost:3001/careers/' + selectedLocationId)
+        .then(res => {
+          this.setState({
+            careerListData: res.data,
+            selectedLocationId
+          });
+        });
+    }
   }
 
   selectListItem(selectedCareerId) {
