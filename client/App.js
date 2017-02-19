@@ -21,8 +21,7 @@ class App extends React.Component {
     return {
 
       div: {
-        display: 'flex',
-        height: '100%'
+        display: 'flex'
       }
 
     };

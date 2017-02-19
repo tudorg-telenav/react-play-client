@@ -19,6 +19,24 @@ class CareersContainer extends React.Component {
     };
   };
 
+  getStyles() {
+
+    return {
+
+      outerDiv: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      },
+      innerDiv: {
+        width: '100%',
+        display: 'flex'
+      }
+
+    };
+  }
+
   componentDidMount() {
 
     axios.get('http://localhost:3001/careerLocations')
@@ -63,19 +81,24 @@ class CareersContainer extends React.Component {
   }
 
   render() {
+
+    const styles = this.getStyles();
+
     return (
-      <div>
+      <div style={styles.outerDiv}>
         <CareerLocations
           onSelectItem={this.selectLocationItem.bind(this)}
           data={this.state.locationData}
         />
-        <CareersList
-          onListItemSelection={this.selectListItem.bind(this)}
-          data={this.state.careerListData}
-        />
-        <CareerDetails
-          data={this.state.detailData}
-        />
+        <div style={styles.innerDiv}>
+          <CareersList
+            onListItemSelection={this.selectListItem.bind(this)}
+            data={this.state.careerListData}
+          />
+          <CareerDetails
+            data={this.state.detailData}
+          />
+        </div>
       </div>
     );
   }

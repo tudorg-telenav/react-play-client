@@ -8,7 +8,7 @@ const CareerLocations = (props) => {
     return {
 
       div: {
-        width: '100%'
+        width: 200
       }
 
     };

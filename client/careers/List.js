@@ -8,7 +8,7 @@ const CareersList = (props) => {
     return {
 
       div: {
-        width: '100%',
+        width: 500,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'

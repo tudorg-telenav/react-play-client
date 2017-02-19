@@ -22,7 +22,9 @@ const CareerDetails = (props) => {
     <div
       style={styles.div}
     >
-      <h2>{title}</h2>
+      <h2>Career Description</h2>
+      <br />
+      <h4>{title}</h4>
       <p>{content}</p>
     </div>
   );
