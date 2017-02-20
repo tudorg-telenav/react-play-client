@@ -32,7 +32,7 @@ class CareersList extends React.Component {
       for (var section in nextProps.data) {
         if (nextProps.data.hasOwnProperty(section)) {
 
-          if (this.sectionContainsItem(section, nextProps.selectedCareerId)) {
+          if (this.sectionContainsItem(nextProps.data[section], nextProps.selectedCareerId)) {
             this.setState({
               section
             });
@@ -50,12 +50,10 @@ class CareersList extends React.Component {
     }
   }
 
-  sectionContainsItem(section, itemId) {
+  sectionContainsItem(sectionData, itemId) {
 
-    var data = this.props.data[section];
-
-    for (var i = 0; i < data.length; i++) {
-      if (itemId === data[i].id) {
+    for (var i = 0; i < sectionData.length; i++) {
+      if (itemId === sectionData[i].id) {
         return true;
       }
     }
