@@ -55,10 +55,12 @@ class CareersContainer extends React.Component {
         });
 
         var detailData = this.getFirstCareer();
-        this.setState({
-          detailData,
-          selectedCareerId: detailData.id
-        });
+        if (detailData !== null) {
+          this.setState({
+            detailData,
+            selectedCareerId: detailData.id
+          });
+        }
       });
 
   }
@@ -81,10 +83,12 @@ class CareersContainer extends React.Component {
             selectedLocationId
           });
           var detailData = this.getFirstCareer();
-          this.setState({
-            detailData,
-            selectedCareerId: detailData.id
-          });
+          if (detailData !== null) {
+            this.setState({
+              detailData,
+              selectedCareerId: detailData.id
+            });
+          }
         });
     }
   }
@@ -137,6 +141,7 @@ class CareersContainer extends React.Component {
         }
       }
     }
+    return null;
   }
 
   getCareer(id) {
