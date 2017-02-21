@@ -5,6 +5,7 @@
   "main": "App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "database.init": "tsc -p server && node server/database.js",
     "client.dev": "webpack-dev-server --config client/webpack.dev.config.js --open",
     "server.dev": "tsc -p server && node server/server.js"
   },

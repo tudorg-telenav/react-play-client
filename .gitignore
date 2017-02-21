@@ -5,3 +5,4 @@ db.sqlite
 TODO.txt
 server/*.js
 server/*js.map
+npm-debug.log
