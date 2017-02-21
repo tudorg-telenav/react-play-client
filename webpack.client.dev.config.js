@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+// var path = require('path');
+// var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var APP_ROOT = 'client';
