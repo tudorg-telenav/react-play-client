@@ -10,6 +10,7 @@ if (fs.existsSync('config.json')) {
   config = JSON.parse(fileContent);
 } else {
   config = {
+    db_file: 'server/db.sqlite',
     server_port: '3001',
     client_origin: 'http://localhost:8080'
   }
@@ -35,7 +36,7 @@ app.use(allowCrossDomain);
 app.get('/careerLocations', function (req, res) {
 
   var allLocations = [];
-  var db = new sqlite3.Database('db.sqlite');
+  var db = new sqlite3.Database(config.db_file);
 
   db.each(
     `
@@ -60,7 +61,7 @@ app.get('/careerLocations', function (req, res) {
 app.get('/careers/', function (req, res) {
 
   var careersTree = {};
-  var db = new sqlite3.Database('db.sqlite');
+  var db = new sqlite3.Database(config.db_file);
 
   var careerTypes = [];
 
@@ -113,7 +114,7 @@ app.get('/careers/:id', function (req, res) {
 
 
   var careersTree = {};
-  var db = new sqlite3.Database('db.sqlite');
+  var db = new sqlite3.Database(config.db_file);
 
   var careerTypes = [];
 
@@ -167,7 +168,7 @@ app.get('/careers/:id', function (req, res) {
 app.get('/press', function (req, res) {
 
   var allPressItems = [];
-  var db = new sqlite3.Database('db.sqlite');
+  var db = new sqlite3.Database(config.db_file);
 
   db.each(
     `
@@ -191,8 +192,8 @@ app.get('/press', function (req, res) {
 
 app.get('/press/:id', function (req, res) {
 
-  var pressItem = {};
-  var db = new sqlite3.Database('db.sqlite');
+  var pressItem: any = {};
+  var db = new sqlite3.Database(config.db_file);
 
   db.each(
     `
