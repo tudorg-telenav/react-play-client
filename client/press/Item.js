@@ -25,7 +25,7 @@ const PressItem = (props) => {
       style={styles.button}
       key={props.id}
     >
-      {props.name}
+      {props.title}
     </button>
   );
 

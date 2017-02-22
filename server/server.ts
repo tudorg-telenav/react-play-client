@@ -2,18 +2,26 @@ import * as express from 'express';
 import * as sqlite3 from 'sqlite3';
 import * as fs from 'fs';
 
+import {
+  ServerConfig,
+  CareerLocation,
+  CareerType,
+  PressItem,
+  Job
+} from "./interfaces";
+
 
 const app: express.Application = express();
 
-let config = null;
+let config: ServerConfig = null;
 if (fs.existsSync('config.json')) {
   let fileContent = fs.readFileSync('config.json', 'utf8');
   config = JSON.parse(fileContent);
 } else {
   config = {
-    db_file: 'server/db.sqlite',
-    server_port: '3001',
-    client_origin: 'http://localhost:8080'
+    databaseFile: 'server/db.sqlite',
+    listeningPort: 3001,
+    clientOrigin: 'http://localhost:8080'
   }
 }
 
@@ -23,7 +31,7 @@ const allowCrossDomain = function(
   res: express.Response,
   next: express.NextFunction
 ) {
-  res.header('Access-Control-Allow-Origin', config.client_origin);
+  res.header('Access-Control-Allow-Origin', config.clientOrigin);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -40,15 +48,15 @@ app.use(allowCrossDomain);
 
 app.get('/careerLocations', function (req: express.Request, res: express.Response) {
 
-  const allLocations = [];
-  const db: sqlite3.Database = new sqlite3.Database(config.db_file);
+  const allLocations: Array<CareerLocation> = [];
+  const db: sqlite3.Database = new sqlite3.Database(config.databaseFile);
 
   db.each(
     `
       SELECT id, name
       FROM career_locations
     `,
-    function(err, row) {
+    function(err: Error, row: any) {
       allLocations.push({
         id: row.id,
         name: row.name
@@ -65,17 +73,17 @@ app.get('/careerLocations', function (req: express.Request, res: express.Respons
 
 app.get('/careers/', function (req: express.Request, res: express.Response) {
 
-  const careersTree = {};
-  const db: sqlite3.Database = new sqlite3.Database(config.db_file);
+  const careersTree: {[key: string]:Array<Job>} = {};
+  const db: sqlite3.Database = new sqlite3.Database(config.databaseFile);
 
-  const careerTypes = [];
+  const careerTypes: Array<CareerType> = [];
 
   db.each(
     `
       SELECT id, type
       FROM career_types
     `,
-    function(err, row) {
+    function(err: Error, row: any) {
       careerTypes.push({
         id: row.id,
         type: row.type
@@ -96,7 +104,7 @@ app.get('/careers/', function (req: express.Request, res: express.Response) {
           JOIN career_types
           ON jobs.career_type_id = career_types.id
         `,
-        function(err, row) {
+        function(err: Error, row: any) {
           careersTree[row.type].push({
             id: row.id,
             title: row.title,
@@ -118,17 +126,17 @@ app.get('/careers/', function (req: express.Request, res: express.Response) {
 app.get('/careers/:id', function (req: express.Request, res: express.Response) {
 
 
-  const careersTree = {};
-  const db: sqlite3.Database = new sqlite3.Database(config.db_file);
+  const careersTree: {[key: string]:Array<Job>} = {};
+  const db: sqlite3.Database = new sqlite3.Database(config.databaseFile);
 
-  const careerTypes = [];
+  const careerTypes: Array<CareerType> = [];
 
   db.each(
     `
       SELECT id, type
       FROM career_types
     `,
-    function(err, row) {
+    function(err: Error, row: any) {
       careerTypes.push({
         id: row.id,
         type: row.type
@@ -151,7 +159,7 @@ app.get('/careers/:id', function (req: express.Request, res: express.Response) {
           JOIN career_locations
           ON jobs.career_location_id = career_locations.id
           WHERE career_locations.id == ` + req.params.id,
-        function(err, row) {
+        function(err: Error, row: any) {
           careersTree[row.type].push({
             id: row.id,
             title: row.title,
@@ -172,18 +180,18 @@ app.get('/careers/:id', function (req: express.Request, res: express.Response) {
 
 app.get('/press', function (req: express.Request, res: express.Response) {
 
-  const allPressItems = [];
-  const db: sqlite3.Database = new sqlite3.Database(config.db_file);
+  const allPressItems: Array<PressItem> = [];
+  const db: sqlite3.Database = new sqlite3.Database(config.databaseFile);
 
   db.each(
     `
       SELECT id, title
       FROM press_releases
     `,
-    function(err, row) {
+    function(err: Error, row: any) {
       allPressItems.push({
         id: row.id,
-        name: row.title
+        title: row.title
       });
     },
     function() {
@@ -197,15 +205,18 @@ app.get('/press', function (req: express.Request, res: express.Response) {
 
 app.get('/press/:id', function (req: express.Request, res: express.Response) {
 
-  const pressItem: any = {};
-  const db: sqlite3.Database = new sqlite3.Database(config.db_file);
+  const pressItem: PressItem = {
+    title: '',
+    content: ''
+  };
+  const db: sqlite3.Database = new sqlite3.Database(config.databaseFile);
 
   db.each(
     `
       SELECT title, content
       FROM press_releases
       WHERE id == ` + req.params.id,
-    function(err, row) {
+    function(err: Error, row: any) {
       pressItem.title = row.title;
       pressItem.content = row.content;
     },
@@ -218,6 +229,6 @@ app.get('/press/:id', function (req: express.Request, res: express.Response) {
 
 });
 
-app.listen(config.server_port, function () {
-  console.log('Example app listening on port ' + config.server_port);
+app.listen(config.listeningPort, function () {
+  console.log('Example app listening on port ' + config.listeningPort);
 });
