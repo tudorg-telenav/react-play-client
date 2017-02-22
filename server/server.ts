@@ -3,11 +3,11 @@ import * as sqlite3 from 'sqlite3';
 import * as fs from 'fs';
 
 
-var app: express.Application = express();
+const app: express.Application = express();
 
-var config = null;
+let config = null;
 if (fs.existsSync('config.json')) {
-  var fileContent = fs.readFileSync('config.json', 'utf8');
+  let fileContent = fs.readFileSync('config.json', 'utf8');
   config = JSON.parse(fileContent);
 } else {
   config = {
@@ -18,7 +18,7 @@ if (fs.existsSync('config.json')) {
 }
 
 //CORS middleware
-var allowCrossDomain = function(
+const allowCrossDomain = function(
   req: express.Request,
   res: express.Response,
   next: express.NextFunction
@@ -28,9 +28,9 @@ var allowCrossDomain = function(
   res.header('Access-Control-Allow-Headers', 'Content-Type');
 
   next();
-}
+};
 
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({
   extended: true
@@ -40,8 +40,8 @@ app.use(allowCrossDomain);
 
 app.get('/careerLocations', function (req: express.Request, res: express.Response) {
 
-  var allLocations = [];
-  var db: sqlite3.Database = new sqlite3.Database(config.db_file);
+  const allLocations = [];
+  const db: sqlite3.Database = new sqlite3.Database(config.db_file);
 
   db.each(
     `
@@ -65,10 +65,10 @@ app.get('/careerLocations', function (req: express.Request, res: express.Respons
 
 app.get('/careers/', function (req: express.Request, res: express.Response) {
 
-  var careersTree = {};
-  var db: sqlite3.Database = new sqlite3.Database(config.db_file);
+  const careersTree = {};
+  const db: sqlite3.Database = new sqlite3.Database(config.db_file);
 
-  var careerTypes = [];
+  const careerTypes = [];
 
   db.each(
     `
@@ -83,9 +83,9 @@ app.get('/careers/', function (req: express.Request, res: express.Response) {
     },
     function() {
 
-      for (var i = 0; i < careerTypes.length; i++) {
+      for (let i = 0; i < careerTypes.length; i++) {
 
-        var type = careerTypes[i].type;
+        const type = careerTypes[i].type;
         careersTree[type] = [];
       }
 
@@ -118,10 +118,10 @@ app.get('/careers/', function (req: express.Request, res: express.Response) {
 app.get('/careers/:id', function (req: express.Request, res: express.Response) {
 
 
-  var careersTree = {};
-  var db: sqlite3.Database = new sqlite3.Database(config.db_file);
+  const careersTree = {};
+  const db: sqlite3.Database = new sqlite3.Database(config.db_file);
 
-  var careerTypes = [];
+  const careerTypes = [];
 
   db.each(
     `
@@ -136,9 +136,9 @@ app.get('/careers/:id', function (req: express.Request, res: express.Response) {
     },
     function() {
 
-      for (var i = 0; i < careerTypes.length; i++) {
+      for (let i = 0; i < careerTypes.length; i++) {
 
-        var type = careerTypes[i].type;
+        const type = careerTypes[i].type;
         careersTree[type] = [];
       }
 
@@ -172,8 +172,8 @@ app.get('/careers/:id', function (req: express.Request, res: express.Response) {
 
 app.get('/press', function (req: express.Request, res: express.Response) {
 
-  var allPressItems = [];
-  var db: sqlite3.Database = new sqlite3.Database(config.db_file);
+  const allPressItems = [];
+  const db: sqlite3.Database = new sqlite3.Database(config.db_file);
 
   db.each(
     `
@@ -197,8 +197,8 @@ app.get('/press', function (req: express.Request, res: express.Response) {
 
 app.get('/press/:id', function (req: express.Request, res: express.Response) {
 
-  var pressItem: any = {};
-  var db: sqlite3.Database = new sqlite3.Database(config.db_file);
+  const pressItem: any = {};
+  const db: sqlite3.Database = new sqlite3.Database(config.db_file);
 
   db.each(
     `
