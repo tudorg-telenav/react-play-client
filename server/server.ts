@@ -1,8 +1,9 @@
-var express = require('express');
-var app = express();
-var fs = require('fs');
-var sqlite3 = require('sqlite3').verbose();
+import * as express from 'express';
+import * as sqlite3 from 'sqlite3';
+import * as fs from 'fs';
 
+
+var app: express.Application = express();
 
 var config = null;
 if (fs.existsSync('config.json')) {
@@ -17,7 +18,11 @@ if (fs.existsSync('config.json')) {
 }
 
 //CORS middleware
-var allowCrossDomain = function(req, res, next) {
+var allowCrossDomain = function(
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) {
   res.header('Access-Control-Allow-Origin', config.client_origin);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -33,10 +38,10 @@ app.use(bodyParser.urlencoded({
 
 app.use(allowCrossDomain);
 
-app.get('/careerLocations', function (req, res) {
+app.get('/careerLocations', function (req: express.Request, res: express.Response) {
 
   var allLocations = [];
-  var db = new sqlite3.Database(config.db_file);
+  var db: sqlite3.Database = new sqlite3.Database(config.db_file);
 
   db.each(
     `
@@ -58,10 +63,10 @@ app.get('/careerLocations', function (req, res) {
 
 });
 
-app.get('/careers/', function (req, res) {
+app.get('/careers/', function (req: express.Request, res: express.Response) {
 
   var careersTree = {};
-  var db = new sqlite3.Database(config.db_file);
+  var db: sqlite3.Database = new sqlite3.Database(config.db_file);
 
   var careerTypes = [];
 
@@ -110,11 +115,11 @@ app.get('/careers/', function (req, res) {
 
 });
 
-app.get('/careers/:id', function (req, res) {
+app.get('/careers/:id', function (req: express.Request, res: express.Response) {
 
 
   var careersTree = {};
-  var db = new sqlite3.Database(config.db_file);
+  var db: sqlite3.Database = new sqlite3.Database(config.db_file);
 
   var careerTypes = [];
 
@@ -165,10 +170,10 @@ app.get('/careers/:id', function (req, res) {
 
 });
 
-app.get('/press', function (req, res) {
+app.get('/press', function (req: express.Request, res: express.Response) {
 
   var allPressItems = [];
-  var db = new sqlite3.Database(config.db_file);
+  var db: sqlite3.Database = new sqlite3.Database(config.db_file);
 
   db.each(
     `
@@ -190,10 +195,10 @@ app.get('/press', function (req, res) {
 
 });
 
-app.get('/press/:id', function (req, res) {
+app.get('/press/:id', function (req: express.Request, res: express.Response) {
 
   var pressItem: any = {};
-  var db = new sqlite3.Database(config.db_file);
+  var db: sqlite3.Database = new sqlite3.Database(config.db_file);
 
   db.each(
     `
