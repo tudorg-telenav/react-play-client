@@ -5,9 +5,10 @@
   "main": "App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "database.init": "tsc server/database.ts && node server/database.js",
-    "client.dev": "webpack-dev-server --config client/webpack.dev.config.js --open",
-    "server.dev": "tsc -p server && node server/server.js"
+    "database.init": "tsc server/database.ts && node %NODE_DEBUG_OPTION% server/database.js",
+    "client.webpack.start": "webpack-dev-server --config client/webpack.dev.config.js --open",
+    "server.build.and.start": "tsc -p server && node --debug=12345 server/server.js",
+    "server.build.watch": "tsc -p server -w"
   },
   "repository": {
     "type": "git",
