@@ -31,4 +31,8 @@ const PressItem = (props) => {
 
 };
 
+PressItem.propTypes = {
+  title: React.PropTypes.string.isRequired
+};
+
 export default PressItem;

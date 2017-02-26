@@ -27,7 +27,7 @@ class PressContainer extends React.Component {
       });
   }
 
-  changeSelectedCareer(id) {
+  changeSelectedPress(id) {
 
     axios.get('http://localhost:3001/press/' + id)
       .then(res => {
@@ -56,7 +56,7 @@ class PressContainer extends React.Component {
     } else {
       return (
         <Press
-          onPressClick={this.changeSelectedCareer.bind(this)}
+          onPressClick={this.changeSelectedPress.bind(this)}
           data={this.state.data}
         />
       );

@@ -25,7 +25,7 @@ const Press = (props) => {
       children.push(
         <PressItem
           onSelect={props.onPressClick}
-          name={props.data[i].title}
+          title={props.data[i].title}
           key={props.data[i].id}
           id={props.data[i].id}
         />)
