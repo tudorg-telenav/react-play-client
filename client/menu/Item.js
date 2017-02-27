@@ -10,12 +10,11 @@ class MenuItem extends React.Component {
   getStyles() {
 
     return {
-
       button: {
+        width: '100%',
         color: this.props.isSelected ? 'red' : 'black',
         fontWeight: this.props.isSelected ? 'bold' : 'normal'
       }
-
     };
   }
 
@@ -25,9 +24,7 @@ class MenuItem extends React.Component {
 
     return (
       <Link to={'/' + this.props.item}>
-        <button
-          style={styles.button}
-        >
+        <button style={styles.button}>
           {this.props.item}
         </button>
       </Link>
