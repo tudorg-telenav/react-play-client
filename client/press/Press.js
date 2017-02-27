@@ -14,8 +14,6 @@ class PressContainer extends React.Component {
     super(props);
 
     this.state = {
-      selectedPress: null,
-      detailData: null,
       data: null
     };
   };
@@ -44,7 +42,6 @@ class PressContainer extends React.Component {
       <PressDetails
         {...matchProps}
         backUrl={this.props.match.url}
-        data={this.state.detailData}
       />
     );
   }
