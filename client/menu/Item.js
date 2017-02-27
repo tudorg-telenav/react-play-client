@@ -19,11 +19,6 @@ class MenuItem extends React.Component {
     };
   }
 
-  handleClick(e) {
-    var item = e.target.innerHTML;
-    this.props.onChange(item);
-  }
-
   render() {
 
     const styles = this.getStyles();
@@ -31,7 +26,6 @@ class MenuItem extends React.Component {
     return (
       <Link to={'/' + this.props.item}>
         <button
-          onClick={this.handleClick.bind(this)}
           style={styles.button}
         >
           {this.props.item}

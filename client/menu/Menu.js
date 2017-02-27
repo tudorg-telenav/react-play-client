@@ -31,7 +31,6 @@ class Menu extends React.Component {
           isSelected={this.props.selectedItem === pages[i]}
           key={i}
           item={pages[i]}
-          onChange={this.props.onChange}
         />
       ));
     }

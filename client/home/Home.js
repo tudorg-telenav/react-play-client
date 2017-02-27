@@ -28,10 +28,6 @@ class Home extends React.Component {
     };
   }
 
-  handleClick() {
-    this.props.onGoToCareers('careers');
-  }
-
   render() {
 
     const styles = this.getStyles();
@@ -41,7 +37,6 @@ class Home extends React.Component {
         <Link to="/careers">
           <button
             style={styles.button}
-            onClick={this.handleClick.bind(this)}
           >
             We are so hiring right now...
           </button>
