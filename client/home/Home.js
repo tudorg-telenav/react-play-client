@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  Link
+} from 'react-router-dom';
 
 class Home extends React.Component {
 
@@ -35,12 +38,14 @@ class Home extends React.Component {
 
     return (
       <div style={styles.div}>
-        <button
-          style={styles.button}
-          onClick={this.handleClick.bind(this)}
-        >
-          We are so hiring right now...
-        </button>
+        <Link to="/careers">
+          <button
+            style={styles.button}
+            onClick={this.handleClick.bind(this)}
+          >
+            We are so hiring right now...
+          </button>
+        </Link>
       </div>
     );
   }

@@ -1,5 +1,8 @@
 import React from 'react';
 import Radium from 'radium';
+import {
+  Link
+} from 'react-router-dom';
 
 @Radium
 class MenuItem extends React.Component {
@@ -26,12 +29,14 @@ class MenuItem extends React.Component {
     const styles = this.getStyles();
 
     return (
-      <button
-        onClick={this.handleClick.bind(this)}
-        style={styles.button}
-      >
-        {this.props.item}
-      </button>
+      <Link to={'/' + this.props.item}>
+        <button
+          onClick={this.handleClick.bind(this)}
+          style={styles.button}
+        >
+          {this.props.item}
+        </button>
+      </Link>
     );
   }
 }
