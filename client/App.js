@@ -31,10 +31,7 @@ class App extends React.Component {
       <Router hashType="noslash">
         <div style={styles.div}>
 
-          <Route exact path="/" render={() => <Menu selectedItem="home" />} />
-          <Route path="/home" render={() => <Menu selectedItem="home" />} />
-          <Route path="/careers" render={() => <Menu selectedItem="careers" />} />
-          <Route path="/press" render={() => <Menu selectedItem="press" />} />
+          <Route path="/:page" component={Menu} />
 
           <Route exact path="/" component={Home} />
           <Route path="/home" component={Home} />
