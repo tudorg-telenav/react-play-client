@@ -7,7 +7,7 @@ const CareerLocationItem = (props) => {
     return {
 
       button: {
-        width: '100%',
+        width: '50%',
         color: props.isSelected ? 'red' : 'black',
         fontWeight: props.isSelected ? 'bold' : 'normal'
       }
