@@ -1,5 +1,8 @@
 import React from 'react';
 import PressItem from './Item';
+import {
+  Link
+} from 'react-router-dom';
 
 const Press = (props) => {
 
@@ -12,6 +15,9 @@ const Press = (props) => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
+      },
+      link: {
+        width: '70%'
       }
 
     };
@@ -23,12 +29,17 @@ const Press = (props) => {
   if (props.data !== null) {
     for (var i = 0; i < props.data.length; i++) {
       children.push(
-        <PressItem
-          onSelect={props.onPressClick}
-          title={props.data[i].title}
+        <Link
+          style={styles.link}
+          to={'' + props.match.url + '/' + props.data[i].id}
           key={props.data[i].id}
-          id={props.data[i].id}
-        />)
+        >
+          <PressItem
+            title={props.data[i].title}
+            id={props.data[i].id}
+          />
+        </Link>
+      );
     }
   }
 

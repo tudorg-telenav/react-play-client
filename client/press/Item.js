@@ -7,21 +7,16 @@ const PressItem = (props) => {
     return {
 
       button: {
-        width: '60%'
+        width: '100%'
       }
 
     };
-  };
-
-  const handleClick = () => {
-    props.onSelect(props.id);
   };
 
   const styles = getStyles();
 
   return (
     <button
-      onClick={handleClick}
       style={styles.button}
       key={props.id}
     >

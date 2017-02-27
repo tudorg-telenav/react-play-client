@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import {
+  Route
+} from 'react-router-dom';
 
 import Press from './List';
 import PressDetails from './Details';
@@ -27,40 +30,44 @@ class PressContainer extends React.Component {
       });
   }
 
-  changeSelectedPress(id) {
+  getStyles () {
 
-    axios.get('http://localhost:3001/press/' + id)
-      .then(res => {
-        this.setState({
-          detailData: res.data,
-          selectedPress: id
-        });
-      });
+    return {
+      div: {
+        width: '100%'
+      }
+    };
   }
 
-  goBackFromDetails() {
-    this.setState({
-      detailData: null,
-      selectedPress: null
-    });
+  renderPressDetails(matchProps) {
+    return (
+      <PressDetails
+        {...matchProps}
+        backUrl={this.props.match.url}
+        data={this.state.detailData}
+      />
+    );
+  }
+
+  renderPressList(matchProps) {
+    return (
+      <Press
+        {...matchProps}
+        data={this.state.data}
+      />
+    );
   }
 
   render() {
-    if (this.state.selectedPress !== null) {
-      return (
-        <PressDetails
-          goBack={this.goBackFromDetails.bind(this)}
-          data={this.state.detailData}
-        />
-      );
-    } else {
-      return (
-        <Press
-          onPressClick={this.changeSelectedPress.bind(this)}
-          data={this.state.data}
-        />
-      );
-    }
+
+    const styles = this.getStyles();
+
+    return (
+      <div style={styles.div}>
+        <Route path={'' + this.props.match.url + '/:id'} render={this.renderPressDetails.bind(this)}/>
+        <Route exact path={'' + this.props.match.url} render={this.renderPressList.bind(this)}/>
+      </div>
+    );
   }
 
 }

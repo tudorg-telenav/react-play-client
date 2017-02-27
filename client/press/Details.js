@@ -1,37 +1,64 @@
 import React from 'react';
+import axios from 'axios';
+import {
+  Link
+} from 'react-router-dom';
 
-const PressDetails = (props) => {
+class PressDetails extends React.Component {
 
-  const getStyles = () => {
+  constructor(props) {
 
-    return {
+    super(props);
 
-      div: {
-        width: '100%'
-      }
-
+    this.state = {
+      detailData: null
     };
   };
 
-  const styles = getStyles();
+  getStyles () {
 
-  const handleBackClick = () => {
-    props.goBack();
-  };
+    return {
+      div: {
+        width: '100%'
+      }
+    };
+  }
 
-  return (
+  componentDidMount() {
 
-    <div style={styles.div}>
-      <button
-        onClick={handleBackClick}
-      >
-        BACK
-      </button>
-      <p>Press details for <strong>{props.data.title}</strong></p>
-      <p>{props.data.content}</p>
-    </div>
-  );
+    axios.get('http://localhost:3001/press/' + this.props.match.params.id)
+      .then(res => {
+        this.setState({
+          detailData: res.data
+        });
+      });
+  }
 
-};
+  render() {
+
+    const styles = this.getStyles();
+
+    let title = '';
+    let content = '';
+    if (this.state.detailData !== null) {
+
+      title = this.state.detailData.title;
+      content = this.state.detailData.content;
+    }
+
+    return (
+      <div style={styles.div}>
+        <Link to={this.props.backUrl}>
+          <button>
+            BACK
+          </button>
+        </Link>
+        <p>Press details for <strong>{title}</strong></p>
+        <p>{content}</p>
+      </div>
+    );
+  }
+
+}
 
 export default PressDetails;
