@@ -1,5 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import {
+  Route,
+  matchPath
+} from 'react-router-dom';
 
 import CareerLocations from './Locations';
 import CareersList from './List';
@@ -15,8 +19,7 @@ class CareersContainer extends React.Component {
       selectedLocation: null,
       locationData: null,
       detailData: null,
-      careerListData: null,
-      selectedCareerId: null
+      careerListData: null
     };
   };
 
@@ -54,12 +57,23 @@ class CareersContainer extends React.Component {
           careerListData: res.data
         });
 
-        var detailData = this.getFirstCareer();
-        if (detailData !== null) {
-          this.setState({
-            detailData,
-            selectedCareerId: detailData.id
-          });
+        const manualMatch = matchPath(this.props.location.pathname, this.props.match.url + '/job=:jobId');
+
+        if (manualMatch === null) {
+          let detailData = this.getFirstCareer();
+          if (detailData !== null) {
+            this.setState({
+              detailData
+            });
+            this.props.push(this.props.match.url + '/job=' + detailData.id);
+          }
+        } else {
+          let detailData = this.getCareer(manualMatch.params.jobId);
+          if (detailData !== null) {
+            this.setState({
+              detailData
+            });
+          }
         }
       });
 
@@ -82,25 +96,52 @@ class CareersContainer extends React.Component {
             careerListData: res.data,
             selectedLocationId
           });
-          var detailData = this.getFirstCareer();
+
+          let detailData = this.getFirstCareer();
           if (detailData !== null) {
             this.setState({
-              detailData,
-              selectedCareerId: detailData.id
+              detailData
             });
+            this.props.push(this.props.match.url + '/job=' + detailData.id);
           }
         });
     }
   }
 
-  selectListItem(selectedCareerId) {
-
-    var detailData = this.getCareer(selectedCareerId);
-    this.setState({
-      detailData,
-      selectedCareerId
-    });
+  renderCareerLocations(matchProps) {
+    return (
+      <CareerLocations
+        {...matchProps}
+        selectedLocationId={this.state.selectedLocationId}
+        onSelectItem={this.selectLocationItem.bind(this)}
+        data={this.state.locationData}
+      />
+    );
   }
+
+  renderCareerList(matchProps) {
+
+    const manualMatch = matchPath(this.props.location.pathname, this.props.match.url + '/job=:jobId');
+
+    return (
+      <CareersList
+        {...matchProps}
+        baseUrl={this.props.match.url}
+        selectedCareerId={manualMatch.params.jobId}
+        data={this.state.careerListData}
+      />
+    );
+  }
+
+  renderCareerDetails(matchProps) {
+    return (
+      <CareerDetails
+        {...matchProps}
+        data={this.state.detailData}
+      />
+    );
+  }
+
 
   render() {
 
@@ -108,20 +149,13 @@ class CareersContainer extends React.Component {
 
     return (
       <div style={styles.outerDiv}>
-        <CareerLocations
-          selectedLocationId={this.state.selectedLocationId}
-          onSelectItem={this.selectLocationItem.bind(this)}
-          data={this.state.locationData}
-        />
+
+        <Route exact path={this.props.match.url + '/job=:jobId'} render={this.renderCareerLocations.bind(this)} />
+
         <div style={styles.innerDiv}>
-          <CareersList
-            selectedCareerId={this.state.selectedCareerId}
-            onListItemSelection={this.selectListItem.bind(this)}
-            data={this.state.careerListData}
-          />
-          <CareerDetails
-            data={this.state.detailData}
-          />
+          <Route exact path={this.props.match.url + '/job=:jobId'} render={this.renderCareerList.bind(this)} />
+
+          <Route exact path={this.props.match.url + '/job=:jobId'} render={this.renderCareerDetails.bind(this)} />
         </div>
       </div>
     );
@@ -153,7 +187,7 @@ class CareersContainer extends React.Component {
         const list = data[section];
 
         for (var i = 0; i < list.length; i++) {
-          if (id === list[i].id) {
+          if (id == list[i].id) { // string or number
             return list[i];
           }
         }

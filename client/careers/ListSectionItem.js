@@ -1,10 +1,11 @@
 import React from 'react';
+import {
+  Link,
+  withRouter,
+  matchPath
+} from 'react-router-dom';
 
 const CareersListSectionItem = (props) => {
-
-  const handleClick = () => {
-    props.onSelect(props.id);
-  };
 
   const getStyles = () => {
 
@@ -19,16 +20,20 @@ const CareersListSectionItem = (props) => {
 
   const styles = getStyles();
 
+  const manualMatch = matchPath(props.match.url + '/job=' + props.id, props.match.url + '/job=:jobId');
+  const url = props.baseUrl + '/job=' + manualMatch.params.jobId;
+
   return (
-    <button
-      style={styles.button}
-      onClick={handleClick}
-      key={props.id}
-    >
-      {props.title}
-    </button>
+    <Link to={url}>
+      <button
+        style={styles.button}
+        key={props.id}
+      >
+        {props.title}
+      </button>
+    </Link>
   );
 
 };
 
-export default CareersListSectionItem;
+export default withRouter(CareersListSectionItem);

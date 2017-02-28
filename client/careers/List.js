@@ -15,31 +15,13 @@ class CareersList extends React.Component {
   getStyles() {
 
     return {
-
       div: {
         width: 550,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
       }
-
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-
-    if (nextProps.data !== null && nextProps.selectedCareerId !== null) {
-      for (var section in nextProps.data) {
-        if (nextProps.data.hasOwnProperty(section)) {
-
-          if (this.sectionContainsItem(nextProps.data[section], nextProps.selectedCareerId)) {
-            this.setState({
-              section
-            });
-          }
-        }
-      }
-    }
   }
 
   toggleSection(section) {
@@ -53,7 +35,7 @@ class CareersList extends React.Component {
   sectionContainsItem(sectionData, itemId) {
 
     for (var i = 0; i < sectionData.length; i++) {
-      if (itemId === sectionData[i].id) {
+      if (itemId == sectionData[i].id) { // string or number
         return true;
       }
     }
@@ -68,12 +50,25 @@ class CareersList extends React.Component {
     var i = 0;
     for (var section in this.props.data) {
       if (this.props.data.hasOwnProperty(section)) {
+
+        let isCollapsed = true;
+        if (this.state.section === section) {
+          isCollapsed = false;
+        } else if (this.state.section === null) {
+          if (this.sectionContainsItem(
+            this.props.data[section],
+            this.props.selectedCareerId
+          )) {
+            isCollapsed = false;
+          }
+        }
+
         children.push(
           <CareersListSection
+            baseUrl={this.props.baseUrl}
             onSectionToggled={this.toggleSection.bind(this)}
-            isCollapsed={this.state.section !== section}
+            isCollapsed={isCollapsed}
             selectedCareerId={this.props.selectedCareerId}
-            onSectionIntemSelection={this.props.onListItemSelection}
             section={section}
             data={this.props.data[section]}
             key={i}
@@ -94,6 +89,6 @@ class CareersList extends React.Component {
     );
   }
 
-};
+}
 
 export default CareersList;
