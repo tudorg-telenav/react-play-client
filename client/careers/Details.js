@@ -5,18 +5,20 @@ const CareerDetails = (props) => {
   const getStyles = () => {
 
     return {
-
       div: {
         width: '100%'
       }
-
     };
   };
 
   const styles = getStyles();
 
-  const title = props.data !== null ? props.data.title : '';
-  const content = props.data !== null ? props.data.content : '';
+  let title = '';
+  let content = '';
+  if (props.data !== null) {
+    title = props.data.title;
+    content = props.data.content;
+  }
 
   return (
     <div
