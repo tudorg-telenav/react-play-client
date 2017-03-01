@@ -178,6 +178,33 @@ app.get('/careers/:id', function (req: express.Request, res: express.Response) {
 
 });
 
+app.get('/job/:id', function (req: express.Request, res: express.Response) {
+
+
+  let job: Job = null;
+  const db: sqlite3.Database = new sqlite3.Database(config.databaseFile);
+
+  db.each(
+    `
+      SELECT *
+      FROM jobs
+      WHERE id == ` + req.params.id,
+    function(err: Error, row: any) {
+      job ={
+        id: row.id,
+        title: row.title,
+        content: row.content
+      };
+    },
+    function() {
+      db.close();
+
+      res.send(job);
+    }
+  );
+
+});
+
 app.get('/press', function (req: express.Request, res: express.Response) {
 
   const allPressItems: Array<PressItem> = [];

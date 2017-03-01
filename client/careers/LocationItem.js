@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  withRouter
+} from 'react-router-dom';
 
 const CareerLocationItem = (props) => {
 
@@ -16,8 +19,20 @@ const CareerLocationItem = (props) => {
   };
 
   const handleClick = () => {
-    props.onSelect(props.id);
-  }
+    if (props.isSelected) {
+      props.push(
+        props.baseUrl +
+        '/job=' + props.match.params.jobId +
+        '/from=all'
+      );
+    } else {
+      props.push(
+        props.baseUrl +
+        '/job=' + props.match.params.jobId +
+        '/from=' + props.id
+      );
+    }
+  };
 
   const styles = getStyles();
 
@@ -33,4 +48,4 @@ const CareerLocationItem = (props) => {
 
 };
 
-export default CareerLocationItem;
+export default withRouter(CareerLocationItem);

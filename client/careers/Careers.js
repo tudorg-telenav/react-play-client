@@ -16,9 +16,6 @@ class CareersContainer extends React.Component {
     super(props);
 
     this.state = {
-      selectedLocation: null,
-      locationData: null,
-      detailData: null,
       careerListData: null
     };
   };
@@ -43,85 +40,59 @@ class CareersContainer extends React.Component {
 
   componentDidMount() {
 
-    axios.get('http://localhost:3001/careerLocations')
-      .then(res => {
-        this.setState({
-          locationData: res.data
-        });
-      });
+    const manualMatch = matchPath(
+      this.props.location.pathname,
+      this.props.match.url + '/job=:jobId/from=:locationId'
+    );
 
-    axios.get('http://localhost:3001/careers/')
+    let suffix = '';
+    if (manualMatch !== null && manualMatch.params.locationId !== 'all') {
+      suffix = manualMatch.params.locationId;
+    }
+
+    axios.get('http://localhost:3001/careers/' + suffix)
       .then(res => {
 
         this.setState({
           careerListData: res.data
         });
 
-        const manualMatch = matchPath(this.props.location.pathname, this.props.match.url + '/job=:jobId');
-
         if (manualMatch === null) {
           let detailData = this.getFirstCareer();
           if (detailData !== null) {
-            this.setState({
-              detailData
-            });
-            this.props.push(this.props.match.url + '/job=' + detailData.id);
-          }
-        } else {
-          let detailData = this.getCareer(manualMatch.params.jobId);
-          if (detailData !== null) {
-            this.setState({
-              detailData
-            });
+            this.props.push(
+              this.props.match.url +
+              '/job=' + detailData.id +
+              '/from=all'
+            );
           }
         }
       });
 
   }
 
-  selectLocationItem(selectedLocationId) {
-
-    if (selectedLocationId === this.state.selectedLocationId) {
-      axios.get('http://localhost:3001/careers/')
-        .then(res => {
-          this.setState({
-            careerListData: res.data,
-            selectedLocationId: null
-          });
-        });
-    } else {
-      axios.get('http://localhost:3001/careers/' + selectedLocationId)
-        .then(res => {
-          this.setState({
-            careerListData: res.data,
-            selectedLocationId
-          });
-
-          let detailData = this.getFirstCareer();
-          if (detailData !== null) {
-            this.setState({
-              detailData
-            });
-            this.props.push(this.props.match.url + '/job=' + detailData.id);
-          }
-        });
-    }
-  }
-
   renderCareerLocations(matchProps) {
+
+    const manualMatch = matchPath(
+      this.props.location.pathname,
+      this.props.match.url + '/job=:jobId/from=:locationId'
+    );
+
     return (
       <CareerLocations
         {...matchProps}
-        selectedLocationId={this.state.selectedLocationId}
-        onSelectItem={this.selectLocationItem.bind(this)}
-        data={this.state.locationData}
+        baseUrl={this.props.match.url}
+        selectedLocationId={manualMatch.params.locationId}
       />
     );
   }
 
   renderCareerList(matchProps) {
 
-    const manualMatch = matchPath(this.props.location.pathname, this.props.match.url + '/job=:jobId');
+    const manualMatch = matchPath(
+      this.props.location.pathname,
+      this.props.match.url + '/job=:jobId/from=:locationId'
+    );
 
     return (
       <CareersList
@@ -134,10 +105,16 @@ class CareersContainer extends React.Component {
   }
 
   renderCareerDetails(matchProps) {
+
+    const manualMatch = matchPath(
+      this.props.location.pathname,
+      this.props.match.url + '/job=:jobId/from=:locationId'
+    );
+
     return (
       <CareerDetails
         {...matchProps}
-        data={this.state.detailData}
+        jobId={manualMatch.params.jobId}
       />
     );
   }
@@ -150,12 +127,24 @@ class CareersContainer extends React.Component {
     return (
       <div style={styles.outerDiv}>
 
-        <Route exact path={this.props.match.url + '/job=:jobId'} render={this.renderCareerLocations.bind(this)} />
+        <Route
+          exact
+          path={this.props.match.url + '/job=:jobId/from=:locationId'}
+          render={this.renderCareerLocations.bind(this)}
+        />
 
         <div style={styles.innerDiv}>
-          <Route exact path={this.props.match.url + '/job=:jobId'} render={this.renderCareerList.bind(this)} />
+          <Route
+            exact
+            path={this.props.match.url + '/job=:jobId/from=:locationId'}
+            render={this.renderCareerList.bind(this)}
+          />
 
-          <Route exact path={this.props.match.url + '/job=:jobId'} render={this.renderCareerDetails.bind(this)} />
+          <Route
+            exact
+            path={this.props.match.url + '/job=:jobId/from=:locationId'}
+            render={this.renderCareerDetails.bind(this)}
+          />
         </div>
       </div>
     );

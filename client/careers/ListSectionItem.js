@@ -1,8 +1,7 @@
 import React from 'react';
 import {
   Link,
-  withRouter,
-  matchPath
+  withRouter
 } from 'react-router-dom';
 
 const CareersListSectionItem = (props) => {
@@ -20,8 +19,10 @@ const CareersListSectionItem = (props) => {
 
   const styles = getStyles();
 
-  const manualMatch = matchPath(props.match.url + '/job=' + props.id, props.match.url + '/job=:jobId');
-  const url = props.baseUrl + '/job=' + manualMatch.params.jobId;
+  const url =
+    props.baseUrl +
+    '/job=' + props.id +
+    '/from=' + props.match.params.locationId;
 
   return (
     <Link to={url}>

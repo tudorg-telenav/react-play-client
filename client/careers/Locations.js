@@ -1,45 +1,67 @@
 import React from 'react';
+import axios from 'axios';
+
 import CareerLocationItem from './LocationItem';
 
-const CareerLocations = (props) => {
+class CareerLocations extends React.Component {
 
-  const getStyles = () => {
+  constructor(props) {
 
-    return {
+    super(props);
 
-      div: {
-        width: '70%'
-      }
-
+    this.state = {
+      data: null
     };
   };
 
-  const styles = getStyles();
+  getStyles() {
 
-  var children = [];
-  if (props.data !== null) {
-    for (var i = 0; i < props.data.length; i++) {
-      children.push(
-        <CareerLocationItem
-          isSelected={props.selectedLocationId === props.data[i].id}
-          onSelect={props.onSelectItem}
-          name={props.data[i].name}
-          id={props.data[i].id}
-          key={props.data[i].id}
-        />
-      );
-    }
+    return {
+      div: {
+        width: '70%'
+      }
+    };
   }
 
-  return (
-    <div
-      style={styles.div}
-    >
-      <h2>Career Locations</h2>
-      {children}
-    </div>
-  );
+  componentDidMount() {
 
-};
+    axios.get('http://localhost:3001/careerLocations')
+      .then(res => {
+        this.setState({
+          data: res.data
+        });
+      });
+  }
+
+  render() {
+
+    const styles = this.getStyles();
+
+    var children = [];
+    if (this.state.data !== null) {
+      for (var i = 0; i < this.state.data.length; i++) {
+        children.push(
+          <CareerLocationItem
+            isSelected={this.props.selectedLocationId == this.state.data[i].id} // string and number
+            baseUrl={this.props.baseUrl}
+            name={this.state.data[i].name}
+            id={this.state.data[i].id}
+            key={this.state.data[i].id}
+          />
+        );
+      }
+    }
+
+    return (
+      <div
+        style={styles.div}
+      >
+        <h2>Career Locations</h2>
+        {children}
+      </div>
+    );
+  }
+
+}
 
 export default CareerLocations;
