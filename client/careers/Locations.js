@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import {
+  matchPath
+} from 'react-router-dom';
 
 import CareerLocationItem from './LocationItem';
 
@@ -37,12 +40,22 @@ class CareerLocations extends React.Component {
 
     const styles = this.getStyles();
 
+    const manualMatch = matchPath(
+      this.props.location.pathname,
+      this.props.baseUrl + '/job=:jobId/from=:locationId'
+    );
+
+    let selectedId = null;
+    if (manualMatch !== null) {
+      selectedId = manualMatch.params.locationId
+    }
+
     var children = [];
     if (this.state.data !== null) {
       for (var i = 0; i < this.state.data.length; i++) {
         children.push(
           <CareerLocationItem
-            isSelected={this.props.selectedLocationId == this.state.data[i].id} // string and number
+            isSelected={selectedId == this.state.data[i].id} // string and number
             baseUrl={this.props.baseUrl}
             name={this.state.data[i].name}
             id={this.state.data[i].id}

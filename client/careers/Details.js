@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import {
+  matchPath
+} from 'react-router-dom';
 
 class CareerDetails extends React.Component {
 
@@ -23,24 +26,30 @@ class CareerDetails extends React.Component {
 
   componentDidMount() {
 
-    this.loadData(this.props.jobId);
+    this.loadData(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
 
-    if (nextProps.jobId != this.props.jobId) {
-      this.loadData(nextProps.jobId);
-    }
+      this.loadData(nextProps);
   }
 
-  loadData(id) {
+  loadData(props) {
 
-    axios.get('http://localhost:3001/job/' + id)
-      .then(res => {
-        this.setState({
-          data: res.data
+    const manualMatch = matchPath(
+      props.location.pathname,
+      props.baseUrl + '/job=:jobId/from=:locationId'
+    );
+
+    if (manualMatch !== null) {
+
+      axios.get('http://localhost:3001/job/' + manualMatch.params.jobId)
+        .then(res => {
+          this.setState({
+            data: res.data
+          });
         });
-      });
+    }
   }
 
   render() {
