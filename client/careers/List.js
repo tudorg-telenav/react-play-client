@@ -17,6 +17,8 @@ class CareersList extends React.Component {
       data: null,
       jobId: null
     };
+
+    this.location = null;
   };
 
   getStyles() {
@@ -33,15 +35,15 @@ class CareersList extends React.Component {
 
   componentDidMount() {
 
-    this.loadData(this.props);
+    this.updateData(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
 
-    this.loadData(nextProps);
+    this.updateData(nextProps);
   }
 
-  loadData(props) {
+  updateData(props) {
 
     const manualMatch = matchPath(
       props.location.pathname,
@@ -53,31 +55,54 @@ class CareersList extends React.Component {
       suffix = manualMatch.params.locationId;
     }
 
-    axios.get('http://localhost:3001/careers/' + suffix)
-      .then(res => {
+    if (this.location !== suffix) {
 
-        this.setState({
-          data: res.data
-        });
+      this.location = suffix;
 
-        if (manualMatch === null || this.getCareer(manualMatch.params.jobId) === null) {
-          let detailData = this.getFirstCareer();
-          if (detailData !== null) {
-            props.push(
-              props.baseUrl +
-              '/job=' + detailData.id +
-              '/from=all'
-            );
+      axios.get('http://localhost:3001/careers/' + suffix)
+        .then(res => {
+
+          this.setState({
+            data: res.data
+          });
+
+          if (manualMatch === null || this.getCareer(manualMatch.params.jobId) === null) {
+            let detailData = this.getFirstCareer();
+            if (detailData !== null) {
+              props.push(
+                props.baseUrl +
+                '/job=' + detailData.id +
+                '/from=all'
+              );
+              this.setState({
+                jobId: detailData.id
+              });
+            }
+          } else {
             this.setState({
-              jobId: detailData.id
+              jobId: manualMatch.params.jobId
             });
           }
-        } else {
+        });
+    } else {
+      if (manualMatch === null) {
+        let detailData = this.getFirstCareer();
+        if (detailData !== null) {
+          props.push(
+            props.baseUrl +
+            '/job=' + detailData.id +
+            '/from=all'
+          );
           this.setState({
-            jobId: manualMatch.params.jobId
+            jobId: detailData.id
           });
         }
-      });
+      } else {
+        this.setState({
+          jobId: manualMatch.params.jobId
+        });
+      }
+    }
   }
 
   toggleSection(section) {
