@@ -123,6 +123,36 @@ app.get('/careers/', function (req: express.Request, res: express.Response) {
 
 });
 
+app.get('/firstCareer', function (req: express.Request, res: express.Response) {
+
+
+  let career: Job = null;
+  const db: sqlite3.Database = new sqlite3.Database(config.databaseFile);
+
+  db.each(
+    `
+      SELECT *
+      FROM jobs
+      ORDER BY id
+      ASC
+      LIMIT 1
+    `,
+    function(err: Error, row: any) {
+      career = {
+        id: row.id,
+        title: row.title,
+        content: row.content
+      };
+    },
+    function() {
+      db.close();
+
+      res.send(career);
+    }
+  );
+
+});
+
 app.get('/careers/:id', function (req: express.Request, res: express.Response) {
 
 

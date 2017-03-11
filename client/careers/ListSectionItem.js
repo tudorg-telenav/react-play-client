@@ -11,8 +11,8 @@ const CareersListSectionItem = (props) => {
     return {
 
       button: {
-        color: props.isSelected ? 'red' : 'black',
-        fontWeight: props.isSelected ? 'bold' : 'normal'
+        color: props.match.params.jobId == props.id ? 'red' : 'black',
+        fontWeight: props.match.params.jobId == props.id ? 'bold' : 'normal'
       }
     };
   };

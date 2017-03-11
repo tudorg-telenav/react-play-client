@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
+  Redirect,
   HashRouter as Router,
   Route
 } from 'react-router-dom';
@@ -23,21 +24,26 @@ class App extends React.Component {
     };
   }
 
+  redirectToDefault() {
+    return (
+      <Redirect to='/home'/>
+    );
+  }
+
   render() {
 
     const styles = this.getStyles();
 
     return (
-      <Router hashType="noslash">
+      <Router hashType='noslash'>
         <div style={styles.div}>
 
-          <Route exact path="/" component={Menu} />
-          <Route path="/:page" component={Menu} />
+          <Route exact path='/' render={this.redirectToDefault} />
+          <Route path='/:page' component={Menu} />
 
-          <Route exact path="/" component={Home} />
-          <Route path="/home" component={Home} />
-          <Route path="/careers" component={CareersContainer} />
-          <Route path="/press" component={PressContainer} />
+          <Route path='/home' component={Home} />
+          <Route path='/careers' component={CareersContainer} />
+          <Route path='/press' component={PressContainer} />
         </div>
       </Router>
     );

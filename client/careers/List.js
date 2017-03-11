@@ -1,8 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {
-  matchPath
-} from 'react-router-dom';
 
 import CareersListSection from './ListSection';
 
@@ -14,11 +11,8 @@ class CareersList extends React.Component {
 
     this.state = {
       section: null,
-      data: null,
-      jobId: null
+      data: null
     };
-
-    this.location = null;
   };
 
   getStyles() {
@@ -35,30 +29,40 @@ class CareersList extends React.Component {
 
   componentDidMount() {
 
-    this.updateData(this.props);
+    let suffix = '';
+    if (this.props.match.params.locationId !== 'all') {
+      suffix = this.props.match.params.locationId;
+    }
+
+    axios.get('http://localhost:3001/careers/' + suffix)
+      .then(res => {
+
+        this.setState({
+          data: res.data
+        });
+
+        if (this.getCareer(this.props.match.params.jobId) === null) {
+          let detailData = this.getFirstCareer();
+          if (detailData !== null) {
+            this.props.push(
+              this.props.baseUrl +
+              '/job=' + detailData.id +
+              '/from=' + (suffix === '' ? 'all' : suffix)
+            );
+          }
+        }
+      });
   }
 
   componentWillReceiveProps(nextProps) {
 
-    this.updateData(nextProps);
-  }
-
-  updateData(props) {
-
-    const manualMatch = matchPath(
-      props.location.pathname,
-      props.baseUrl + '/job=:jobId/from=:locationId'
-    );
-
-    let suffix = '';
-    if (manualMatch !== null && manualMatch.params.locationId !== 'all') {
-      suffix = manualMatch.params.locationId;
-    }
-
-    if (this.location !== suffix) {
-
-      this.location = suffix;
-
+    if (
+      this.props.match.params.locationId !== nextProps.match.params.locationId
+    ) {
+      let suffix = '';
+      if (nextProps.match.params.locationId !== 'all') {
+        suffix = nextProps.match.params.locationId;
+      }
       axios.get('http://localhost:3001/careers/' + suffix)
         .then(res => {
 
@@ -66,42 +70,17 @@ class CareersList extends React.Component {
             data: res.data
           });
 
-          if (manualMatch === null || this.getCareer(manualMatch.params.jobId) === null) {
+          if (this.getCareer(nextProps.match.params.jobId) === null) {
             let detailData = this.getFirstCareer();
             if (detailData !== null) {
-              props.push(
-                props.baseUrl +
+              nextProps.push(
+                nextProps.baseUrl +
                 '/job=' + detailData.id +
-                '/from=all'
+                '/from=' + (suffix === '' ? 'all' : suffix)
               );
-              this.setState({
-                jobId: detailData.id
-              });
             }
-          } else {
-            this.setState({
-              jobId: manualMatch.params.jobId
-            });
           }
         });
-    } else {
-      if (manualMatch === null) {
-        let detailData = this.getFirstCareer();
-        if (detailData !== null) {
-          props.push(
-            props.baseUrl +
-            '/job=' + detailData.id +
-            '/from=all'
-          );
-          this.setState({
-            jobId: detailData.id
-          });
-        }
-      } else {
-        this.setState({
-          jobId: manualMatch.params.jobId
-        });
-      }
     }
   }
 
@@ -138,7 +117,7 @@ class CareersList extends React.Component {
         } else if (this.state.section === null) {
           if (this.sectionContainsItem(
             this.state.data[section],
-            this.state.jobId
+            this.props.match.params.jobId
           )) {
             isCollapsed = false;
           }
@@ -149,7 +128,6 @@ class CareersList extends React.Component {
             baseUrl={this.props.baseUrl}
             onSectionToggled={this.toggleSection.bind(this)}
             isCollapsed={isCollapsed}
-            selectedCareerId={this.state.jobId}
             section={section}
             data={this.state.data[section]}
             key={i}

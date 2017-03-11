@@ -1,5 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 import {
+  matchPath,
   Route
 } from 'react-router-dom';
 
@@ -25,6 +27,25 @@ class CareersContainer extends React.Component {
       }
 
     };
+  }
+
+  componentWillMount() {
+
+    const manualMatch = matchPath(
+      this.props.location.pathname,
+      this.props.match.path + '/job=:jobId/from=:locationId'
+    );
+
+    if (manualMatch === null) {
+      axios.get('http://localhost:3001/firstCareer')
+        .then(res => {
+          this.props.push(
+            this.props.match.url +
+            '/job=' + res.data.id +
+            '/from=all'
+          );
+        });
+    }
   }
 
   renderCareerLocations(matchProps) {
@@ -67,11 +88,6 @@ class CareersContainer extends React.Component {
 
         <Route
           exact
-          path={this.props.match.url}
-          render={this.renderCareerLocations.bind(this)}
-        />
-        <Route
-          exact
           path={this.props.match.url + '/job=:jobId/from=:locationId'}
           render={this.renderCareerLocations.bind(this)}
         />
@@ -79,19 +95,8 @@ class CareersContainer extends React.Component {
         <div style={styles.innerDiv}>
           <Route
             exact
-            path={this.props.match.url}
-            render={this.renderCareerList.bind(this)}
-          />
-          <Route
-            exact
             path={this.props.match.url + '/job=:jobId/from=:locationId'}
             render={this.renderCareerList.bind(this)}
-          />
-
-          <Route
-            exact
-            path={this.props.match.url}
-            render={this.renderCareerDetails.bind(this)}
           />
           <Route
             exact

@@ -28,7 +28,6 @@ const CareersListSection = (props) => {
         children.push(
           <CareersListSectionItem
             baseUrl={props.baseUrl}
-            isSelected={props.selectedCareerId == props.data[i].id} // string or number
             title={props.data[i].title}
             key={i}
             id={props.data[i].id}
