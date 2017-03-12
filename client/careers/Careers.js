@@ -39,7 +39,7 @@ class CareersContainer extends React.Component {
     if (manualMatch === null) {
       axios.get('http://localhost:3001/firstCareer')
         .then(res => {
-          this.props.push(
+          this.props.replace( // history should skip redirects like these
             this.props.match.url +
             '/job=' + res.data.id +
             '/from=all'

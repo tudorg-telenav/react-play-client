@@ -44,7 +44,7 @@ class CareersList extends React.Component {
         if (this.getCareer(this.props.match.params.jobId) === null) {
           let detailData = this.getFirstCareer();
           if (detailData !== null) {
-            this.props.push(
+            this.props.replace( // history should skip redirects like these
               this.props.baseUrl +
               '/job=' + detailData.id +
               '/from=' + (suffix === '' ? 'all' : suffix)
@@ -77,7 +77,7 @@ class CareersList extends React.Component {
               '/job=' + detailData.id +
               '/from=' + (suffix === '' ? 'all' : suffix);
             if (newUrl !== nextProps.location.pathname) {
-              nextProps.push(
+              nextProps.replace( // history should skip redirects like these
                 nextProps.baseUrl +
                 '/job=' + detailData.id +
                 '/from=' + (suffix === '' ? 'all' : suffix)
