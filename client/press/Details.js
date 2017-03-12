@@ -18,8 +18,16 @@ class PressDetails extends React.Component {
   getStyles () {
 
     return {
+      outerDiv: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      },
       div: {
-        width: '100%'
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '80%'
       }
     };
   }
@@ -47,14 +55,17 @@ class PressDetails extends React.Component {
     }
 
     return (
-      <div style={styles.div}>
-        <Link to={this.props.backUrl}>
-          <button>
-            BACK
-          </button>
-        </Link>
-        <p>Press details for <strong>{title}</strong></p>
-        <p>{content}</p>
+      <div style={styles.outerDiv}>
+        <div style={styles.div}>
+          <h2>Details</h2>
+          <Link to={this.props.backUrl}>
+            <button>
+              BACK
+            </button>
+          </Link>
+          <h3>{title}</h3>
+          <p>{content}</p>
+        </div>
       </div>
     );
   }
