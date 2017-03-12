@@ -9,8 +9,12 @@ const CareersListSectionItem = (props) => {
   const getStyles = () => {
 
     return {
-
+      outerDiv: {
+        display: 'flex',
+        flexDirection: 'row-reverse'
+      },
       button: {
+        width: 300,
         color: props.match.params.jobId == props.id ? 'red' : 'black',
         fontWeight: props.match.params.jobId == props.id ? 'bold' : 'normal'
       }
@@ -25,15 +29,17 @@ const CareersListSectionItem = (props) => {
     '/from=' + props.match.params.locationId;
 
   return (
-    <Link to={url}>
-      <button
-        style={styles.button}
-        key={props.id}
-        disabled={props.match.params.jobId == props.id}
-      >
-        {props.title}
-      </button>
-    </Link>
+    <div style={styles.outerDiv}>
+      <Link to={url}>
+        <button
+          style={styles.button}
+          key={props.id}
+          disabled={props.match.params.jobId == props.id}
+        >
+          {props.title}
+        </button>
+      </Link>
+    </div>
   );
 
 };

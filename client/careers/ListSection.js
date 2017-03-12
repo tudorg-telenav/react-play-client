@@ -7,7 +7,7 @@ const CareersListSection = (props) => {
 
     return {
       div: {
-        width: '60%',
+        width: 350,
         display: 'flex',
         flexDirection: 'column'
       },
@@ -16,6 +16,10 @@ const CareersListSection = (props) => {
       },
       titleSpan: {
         color: props.data.length > 0 ? 'black' : 'grey'
+      },
+      childrenDiv: {
+        display: 'flex',
+        flexDirection: 'column'
       }
     };
   };
@@ -63,7 +67,9 @@ const CareersListSection = (props) => {
           {props.section}
         </span>
       </span>
-      {children}
+      <div style={styles.childrenDiv}>
+        {children}
+      </div>
     </div>
   );
 
