@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Link,
   withRouter
 } from 'react-router-dom';
 
@@ -18,32 +19,30 @@ const CareerLocationItem = (props) => {
     };
   };
 
-  const handleClick = () => {
-    if (props.isSelected) {
-      props.push(
-        props.baseUrl +
-        '/job=' + props.match.params.jobId +
-        '/from=all'
-      );
-    } else {
-      props.push(
-        props.baseUrl +
-        '/job=' + props.match.params.jobId +
-        '/from=' + props.id
-      );
-    }
-  };
-
   const styles = getStyles();
 
+  let url = null;
+  if (props.isSelected) {
+    url =
+      props.baseUrl +
+      '/job=' + props.match.params.jobId +
+      '/from=all';
+  } else {
+    url =
+      props.baseUrl +
+      '/job=' + props.match.params.jobId +
+      '/from=' + props.id;
+  }
+
   return (
-    <button
-      onClick={handleClick}
-      style={styles.button}
-      key={props.id}
-    >
-      {props.name}
-    </button>
+    <Link to={url}>
+      <button
+        style={styles.button}
+        key={props.id}
+      >
+        {props.name}
+      </button>
+    </Link>
   );
 
 };
