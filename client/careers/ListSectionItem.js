@@ -29,6 +29,7 @@ const CareersListSectionItem = (props) => {
       <button
         style={styles.button}
         key={props.id}
+        disabled={props.match.params.jobId == props.id}
       >
         {props.title}
       </button>

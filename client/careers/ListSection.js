@@ -6,13 +6,17 @@ const CareersListSection = (props) => {
   const getStyles = () => {
 
     return {
-
       div: {
         width: '60%',
         display: 'flex',
         flexDirection: 'column'
+      },
+      facetStrong: {
+        color: props.data.length > 0 ? 'green' : 'grey'
+      },
+      titleSpan: {
+        color: props.data.length > 0 ? 'black' : 'grey'
       }
-
     };
   };
 
@@ -44,12 +48,20 @@ const CareersListSection = (props) => {
       style={styles.div}
     >
       <span>
-        <button onClick={handleClick.bind(this)}>
+        <button
+          onClick={handleClick.bind(this)}
+          disabled={props.data.length === 0}
+        >
           {props.isCollapsed ? '+' : '-'}
         </button>
-        <strong>
-          {props.section}
+        &nbsp;
+        <strong style={styles.facetStrong}>
+          ({props.data.length})
         </strong>
+        &nbsp;
+        <span style={styles.titleSpan}>
+          {props.section}
+        </span>
       </span>
       {children}
     </div>

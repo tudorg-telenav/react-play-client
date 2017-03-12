@@ -24,7 +24,10 @@ class MenuItem extends React.Component {
 
     return (
       <Link to={'/' + this.props.item}>
-        <button style={styles.button}>
+        <button
+          style={styles.button}
+          disabled={this.props.isSelected}
+        >
           {this.props.item}
         </button>
       </Link>

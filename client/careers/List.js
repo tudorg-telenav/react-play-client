@@ -70,9 +70,13 @@ class CareersList extends React.Component {
             data: res.data
           });
 
-          if (this.getCareer(nextProps.match.params.jobId) === null) {
-            let detailData = this.getFirstCareer();
-            if (detailData !== null) {
+          let detailData = this.getFirstCareer();
+          if (detailData !== null) {
+            let newUrl =
+              nextProps.baseUrl +
+              '/job=' + detailData.id +
+              '/from=' + (suffix === '' ? 'all' : suffix);
+            if (newUrl !== nextProps.location.pathname) {
               nextProps.push(
                 nextProps.baseUrl +
                 '/job=' + detailData.id +
@@ -80,6 +84,11 @@ class CareersList extends React.Component {
               );
             }
           }
+
+          this.setState({
+            section: this.getFirstNonEmptySection()
+          });
+
         });
     }
   }
@@ -146,6 +155,23 @@ class CareersList extends React.Component {
         {children}
       </div>
     );
+  }
+
+  getFirstNonEmptySection() {
+
+    const data = this.state.data;
+
+    for (var section in data) {
+      if (data.hasOwnProperty(section)) {
+
+        const list = data[section];
+
+        if (list.length > 0) {
+          return section;
+        }
+      }
+    }
+    return null;
   }
 
   getFirstCareer() {
