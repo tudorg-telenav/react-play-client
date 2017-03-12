@@ -13,7 +13,8 @@ class Menu extends React.Component {
       div: {
         width: 100,
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        alignItems: 'center'
       }
 
     };
@@ -48,6 +49,7 @@ class Menu extends React.Component {
       <div
         style={styles.div}
       >
+        <h2>Menu</h2>
         {anchors}
       </div>
     );

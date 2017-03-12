@@ -19,6 +19,7 @@ class Home extends React.Component {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
+        flexDirection: 'column',
         justifyContent: 'center'
       },
       button: {
@@ -34,6 +35,7 @@ class Home extends React.Component {
 
     return (
       <div style={styles.div}>
+        <h2>Home</h2>
         <Link to="/careers">
           <button
             style={styles.button}

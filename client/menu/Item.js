@@ -11,7 +11,7 @@ class MenuItem extends React.Component {
 
     return {
       button: {
-        width: '100%',
+        width: 80,
         color: this.props.isSelected ? 'red' : 'black',
         fontWeight: this.props.isSelected ? 'bold' : 'normal'
       }
