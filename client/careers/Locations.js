@@ -69,7 +69,7 @@ class CareerLocations extends React.Component {
       <div
         style={styles.div}
       >
-        <h2>Career Locations</h2>
+        <h2>Locations</h2>
         {children}
       </div>
     );

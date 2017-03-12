@@ -67,7 +67,7 @@ class CareerDetails extends React.Component {
       <div
         style={styles.div}
       >
-        <h2>Career Description</h2>
+        <h2>Description</h2>
         <br />
         <h4>{title}</h4>
         <p>{content}</p>

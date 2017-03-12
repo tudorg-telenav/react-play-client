@@ -21,8 +21,7 @@ class CareersList extends React.Component {
       div: {
         width: 550,
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
+        flexDirection: 'column'
       }
     };
   }
@@ -151,7 +150,7 @@ class CareersList extends React.Component {
       <div
         style={styles.div}
       >
-        <h2>Careers List</h2>
+        <h2>List</h2>
         {children}
       </div>
     );
